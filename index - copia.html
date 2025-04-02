@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>VaisUSDT - Plataforma Integral</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Font Awesome para íconos -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-kuC0fG4n2nROUXbX95CYULIixZ0qfZB8pxqMQ9WryImbWXqQl16VaxY+RjSnSxK9U3fZbN/4rqDkF2Kc4n5z5g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    :root {
+      --primary-green: #26A17B;
+      --secondary-blue: #003366;
+      --accent-blue: #007BFF;
+      --white: #ffffff;
+      --dark: #333;
+      --light-gray: #f4f4f4;
+      --bg-body: #FAFAFA;
+      --vip-hover: #FFD700;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--dark);
+    }
+
+    /* Header */
+    header {
+      background: var(--primary-green);
+      color: var(--white);
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    header:hover {
+      background: var(--accent-blue);
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      width: 45px;
+      margin-right: 10px;
+      border-radius: 50%;
+      border: 2px solid var(--white);
+    }
+
+    /* Bottom Navigation */
+    nav.bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--primary-green);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      z-index: 150;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+
+    nav.bottom-nav button {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    nav.bottom-nav button:hover {
+      transform: scale(1.1);
+    }
+
+    nav.bottom-nav button span {
+      font-size: 0.7em;
+      margin-top: 3px;
+    }
+
+    /* Secciones */
+    .section {
+      max-width: 900px;
+      margin: 80px auto 80px auto;
+      background: var(--white);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none;
+      border: 2px solid transparent;
+      transition: border 0.3s ease;
+    }
+
+    .section.active {
+      display: block;
+      border-color: var(--primary-green);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+    }
+
+    /* Inicio */
+    .app-info {
+      margin: 20px 0;
+      background: var(--light-gray);
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .app-info h3 {
+      margin: 0 0 10px;
+      color: var(--secondary-blue);
+    }
+
+    .app-info p {
+      margin: 5px 0;
+      line-height: 1.4;
+    }
+
+    /* Carrusel */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 2px solid var(--secondary-blue);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .carousel-images div {
+      width: 100%;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    /* Ejemplo de backgrounds en el carrusel */
+    .img1 {
+      background: url('https://via.placeholder.com/900x250/007BFF/ffffff?text=Carrusel+1');
+    }
+    .img2 {
+      background: url('https://via.placeholder.com/900x250/0056b3/ffffff?text=Carrusel+2');
+    }
+    .img3 {
+      background: url('https://via.placeholder.com/900x250/003f7f/ffffff?text=Carrusel+3');
+    }
+
+    .carousel-controls {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .carousel-controls button {
+      background: var(--primary-green);
+      border: none;
+      color: var(--white);
+      padding: 8px 12px;
+      margin: 0 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .carousel-controls button:hover {
+      background: var(--accent-blue);
+    }
+
+    .func-btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .func-btns button {
+      background: var(--primary-green);
+      border: none;
+      color: var(--white);
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      flex: 1 1 40%;
+      margin: 5px;
+      font-size: 0.95em;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .func-btns button:hover {
+      background: var(--accent-blue);
+      transform: scale(1.03);
+    }
+
+    /* Tareas */
+    .tareas-estadisticas {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .tarea-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+
+    .tarea-item button {
+      background: var(--secondary-blue);
+      border: none;
+      color: var(--white);
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .tarea-item button:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Popup de minado */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .popup {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      max-width: 400px;
+    }
+
+    .popup img {
+      width: 50px;
+      margin-bottom: 10px;
+    }
+
+    .popup h4 {
+      margin: 10px 0;
+      font-size: 1.2em;
+      color: var(--secondary-blue);
+    }
+
+    .popup button {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: background 0.3s;
+    }
+
+    .popup button:hover {
+      background: var(--accent-blue);
+    }
+
+    /* VIP */
+    .vip-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .vip-card {
+      border: 2px solid var(--primary-green);
+      border-radius: 12px;
+      padding: 15px;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      background: var(--white);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    .vip-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border-color: var(--vip-hover);
+    }
+
+    .vip-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    /* Popup de compra VIP */
+    .popup-vip-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
+
+    .popup-vip {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      width: 80%;
+      max-width: 350px;
+    }
+
+    .popup-vip h4 {
+      margin-bottom: 15px;
+      font-size: 1.1em;
+    }
+
+    .popup-vip .vip-buttons {
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 15px;
+    }
+
+    .popup-vip button {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin: 0 5px;
+    }
+
+    .popup-vip button:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Invitar (Team report) */
+    .team-report {
+      margin-top: 20px;
+      background: var(--light-gray);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .team-report .invite-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 15px;
+    }
+
+    .team-report .invite-info p {
+      margin: 5px 0;
+    }
+
+    .team-report .invite-info button {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .team-report .invite-info button:hover {
+      background: var(--accent-blue);
+    }
+
+    .team-report .stats-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+
+    .team-report .stats-bar select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    .team-report .stats-bar button {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .team-report .stats-bar button:hover {
+      background: var(--accent-blue);
+    }
+
+    .team-report .stats-header {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    .teams {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .team-item {
+      background: var(--white);
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Mi Perfil */
+    .profile-stats {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      background: var(--light-gray);
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .profile-stats div {
+      flex: 1 1 45%;
+      margin: 5px 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .profile-stats .btn-customer-service {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+    }
+
+    .profile-stats .btn-customer-service:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Formulario de Retiro */
+    form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    form input[type="text"],
+    form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 15px;
+      transition: border 0.3s;
+    }
+
+    form input[type="text"]:focus,
+    form input[type="password"]:focus {
+      border-color: var(--primary-green);
+      outline: none;
+    }
+
+    form input[type="submit"] {
+      background: var(--primary-green);
+      color: var(--white);
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      transition: background 0.3s;
+    }
+
+    form input[type="submit"]:hover {
+      background: var(--accent-blue);
+    }
+
+    /* Recarga */
+    .recarga-box {
+      background: linear-gradient(135deg, var(--primary-green), var(--secondary-blue));
+      color: var(--white);
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+      animation: pulsate 2s infinite;
+    }
+
+    @keyframes pulsate {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .recarga-box p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .recarga-box button {
+      background: var(--white);
+      color: var(--primary-green);
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .recarga-box button:hover {
+      background: var(--accent-blue);
+      transform: scale(1.05);
+    }
+
+    /* Animación Tareas (minar) */
+    @keyframes minarAnim {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .minando {
+      animation: minarAnim 1s ease-in-out;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .section {
+        margin: 80px 10px 80px 10px;
+      }
+      nav.bottom-nav button {
+        font-size: 1em;
+      }
+      .profile-stats div {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Popup para minado -->
+  <div class="popup-overlay" id="popupOverlay">
+    <div class="popup" id="popup">
+      <img
+        src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=023"
+        alt="USDT Logo"
+      />
+      <h4 id="popupMessage">Haz minado: 0 USDT</h4>
+      <button id="closePopupBtn">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Popup para compra VIP -->
+  <div class="popup-vip-overlay" id="popupVipOverlay">
+    <div class="popup-vip" id="popupVip">
+      <h4 id="vipPopupMessage">¿Deseas comprar VIP?</h4>
+      <div class="vip-buttons">
+        <button id="confirmVipBtn">Confirmar</button>
+        <button id="cancelVipBtn">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header onclick="showSection('inicioSection')">
+    <div class="logo">
+      <img
+        src="https://cryptologos.cc/logos/tether-usdt-logo.png?v=023"
+        alt="USDT Logo"
+      />
+      <span style="font-size:1.5em;">VaisUSDT</span>
+    </div>
+  </header>
+
+  <!-- Sección INICIO -->
+  <div id="inicioSection" class="section active">
+    <h2>Panel de Usuario - Inicio</h2>
+    <!-- Carrusel con 3 imágenes -->
+    <div class="carousel" id="carousel">
+      <div class="carousel-images" id="carouselImages">
+        <div class="img1">Carrusel 1</div>
+        <div class="img2">Carrusel 2</div>
+        <div class="img3">Carrusel 3</div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button id="prevBtn">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="nextBtn">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- Información de la App -->
+    <div class="app-info">
+      <h3>¡Bienvenido a VaisUSDT!</h3>
+      <p>
+        Plataforma de inversión y tareas diarias para generar ingresos en USDT.
+      </p>
+      <p>
+        Disfruta de nuestros planes VIP, sistema de referidos y funciones como
+        la Ruleta.
+      </p>
+    </div>
+
+    <!-- Botones principales -->
+    <div class="func-btns">
+      <button onclick="showSection('retiroSection')">
+        <i class="fas fa-hand-holding-usd"></i> Retiro
+      </button>
+      <button onclick="showSection('recargaSection')">
+        <i class="fas fa-coins"></i> Recarga
+      </button>
+      <button onclick="showSection('ruletaSection')">
+        <i class="fas fa-dice"></i> Ruleta
+      </button>
+      <button onclick="showSection('invitarSection')">
+        <i class="fas fa-user-friends"></i> Invitar
+      </button>
+      <button onclick="showSection('tareaSection')">
+        <i class="fas fa-tasks"></i> Tarea
+      </button>
+    </div>
+  </div>
+
+  <!-- Sección TAREA -->
+  <div id="tareaSection" class="section">
+    <h2>TAREAS DE HOY</h2>
+    <div class="tareas-estadisticas">
+      <div>
+        REALIZADAS:
+        <span id="realizadasCount">0</span>
+      </div>
+      <div>
+        PENDIENTES:
+        <span id="pendientesCount">1</span>
+      </div>
+      <div>
+        COMPLETADAS:
+        <span id="completadasCount">0</span>
+      </div>
+    </div>
+    <div class="tarea-item" id="tareaMinado">
+      <div>COMPLETAR MINADO DE BITCOIN</div>
+      <button id="minarBtn">MINAR</button>
+    </div>
+    <p
+      id="resultadoTarea"
+      style="text-align:center; font-weight:bold; margin-top:15px;"
+    ></p>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección VIP -->
+  <div id="vipSection" class="section">
+    <h2>Planes VIP</h2>
+    <div class="vip-container" id="vipContainer">
+      <div class="vip-card" data-plan="1">
+        <img
+          src="https://via.placeholder.com/250x150/007BFF/ffffff?text=VIP+1"
+          alt="VIP 1"
+        />
+        <h4>VIP 1</h4>
+        <p>Inversión: 11 USDT</p>
+        <p>Ganancia: 5.5 USDT</p>
+        <p>Total: 165 USDT</p>
+      </div>
+
+      <div class="vip-card" data-plan="2">
+        <img
+          src="https://via.placeholder.com/250x150/0056b3/ffffff?text=VIP+2"
+          alt="VIP 2"
+        />
+        <h4>VIP 2</h4>
+        <p>Inversión: 41 USDT</p>
+        <p>Ganancia: 21.02 USDT</p>
+        <p>Total: 630 USDT</p>
+      </div>
+
+      <div class="vip-card" data-plan="3">
+        <img
+          src="https://via.placeholder.com/250x150/003f7f/ffffff?text=VIP+3"
+          alt="VIP 3"
+        />
+        <h4>VIP 3</h4>
+        <p>Inversión: 141 USDT</p>
+        <p>Ganancia: 74.21 USDT</p>
+        <p>Total: 2226.30 USDT</p>
+      </div>
+    </div>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección INVITAR (Team report) -->
+  <div id="invitarSection" class="section">
+    <h2>Team report</h2>
+    <div class="team-report">
+      <div class="invite-info">
+        <p>
+          <strong>Invitation code</strong>:
+          <span id="invitacionCode">--</span>
+        </p>
+        <p>Copy invitation link</p>
+        <button id="copyInviteBtn">Copiar</button>
+      </div>
+
+      <p id="inviteLinkText" style="margin-bottom:15px;">
+        https://vaisusdt.xyz/code/--
+      </p>
+
+      <div class="stats-bar">
+        <select id="timeSelect">
+          <option value="">Please select a time</option>
+          <option value="today">Today</option>
+          <option value="week">This week</option>
+          <option value="month">This month</option>
+        </select>
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div class="stats-header">
+        <div>0 new team</div>
+        <div>USD0.00 Team recharge</div>
+        <div>USD0.00 Team withdrawal</div>
+      </div>
+      <div class="stats-header">
+        <div>0 Number of people making first deposit</div>
+        <div>0 Number of first-time withdrawals</div>
+      </div>
+
+      <div class="teams">
+        <div class="team-item">
+          <div>team A</div>
+          <div>13% Team benefits</div>
+        </div>
+        <div class="team-item">
+          <div>team B</div>
+          <div>2% Team benefits</div>
+        </div>
+        <div class="team-item">
+          <div>team C</div>
+          <div>1% Team benefits</div>
+        </div>
+      </div>
+    </div>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección MI PERFIL -->
+  <div id="perfilSection" class="section">
+    <h2>Mi Perfil</h2>
+    <img
+      src="https://via.placeholder.com/800x300/cccccc/333333?text=Imagen+de+Perfil"
+      alt="Mi Perfil"
+      style="width:100%; border-radius:8px; margin-bottom:15px;"
+    />
+
+    <div class="profile-stats">
+      <div>
+        <p>USD0.00</p>
+        <small>Income</small>
+      </div>
+      <div>
+        <p>USD0.00</p>
+        <small>Funds</small>
+      </div>
+      <div>
+        <p>0.00</p>
+        <small>Today's earnings</small>
+      </div>
+      <div>
+        <p>0.00</p>
+        <small>Earnings this month</small>
+      </div>
+      <div>
+        <p>0.00</p>
+        <small>Revenue last month</small>
+      </div>
+      <div>
+        <p>0.00</p>
+        <small>Total revenue</small>
+      </div>
+      <a
+        href="https://t.me/crisxxio"
+        target="_blank"
+        class="btn-customer-service"
+      >
+        Customer Service
+      </a>
+    </div>
+
+    <p>
+      <strong>Nivel VIP:</strong>
+      <span id="vipNivel">0</span>
+    </p>
+    <p>
+      <strong>Código de invitación:</strong>
+      <span id="perfilInvitacion">--</span>
+    </p>
+    <p>
+      <strong>Enlace de invitación:</strong>
+      <a id="perfilLink" href="#" target="_blank">vaisusdt.xyz/code/--</a>
+    </p>
+
+    <div class="func-btns">
+      <button onclick="showSection('retiroSection')">
+        <i class="fas fa-hand-holding-usd"></i> Retiro
+      </button>
+      <button onclick="showSection('recargaSection')">
+        <i class="fas fa-coins"></i> Recarga
+      </button>
+      <button onclick="showSection('invitarSection')">
+        <i class="fas fa-user-friends"></i> Invitar
+      </button>
+    </div>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección RETIRO -->
+  <div id="retiroSection" class="section">
+    <h2>Retiro por BEP20</h2>
+    <img
+      src="https://via.placeholder.com/800x300/eeeeee/333333?text=Retiro"
+      alt="Retiro"
+      style="width:100%; border-radius:8px; margin-bottom:15px;"
+    />
+    <form id="retiroForm">
+      <label for="amount">Cantidad a Retirar</label>
+      <input
+        type="text"
+        id="amount"
+        name="amount"
+        placeholder="Amount: 5.5-999999$"
+        required
+      />
+
+      <label for="wallet">Wallet (Billetera BEP20)</label>
+      <input
+        type="text"
+        id="wallet"
+        name="wallet"
+        placeholder="Ingresa tu dirección BEP20"
+        required
+      />
+
+      <label for="password">Contraseña</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Tu contraseña de inicio de sesión"
+        required
+      />
+
+      <input type="submit" value="Enviar Retiro" />
+    </form>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección RECARGA -->
+  <div id="recargaSection" class="section">
+    <h2>Recarga - Red BEP20</h2>
+    <div class="recarga-box">
+      <p><strong>Dirección:</strong></p>
+      <p id="bepAddress" style="font-size:1.2em;">
+        0xa06a7a10bbe59bf3204e2be45606e7d954601a91
+      </p>
+      <button id="copyBtn">Copiar</button>
+      <p style="margin-top:10px; font-size:0.9em;">
+        Mínimo de inversión: 11 USDT
+      </p>
+    </div>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Sección RULETA -->
+  <div id="ruletaSection" class="section">
+    <h2>Ruleta</h2>
+    <img
+      src="https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      alt="Ruleta"
+      style="width:100%; border-radius:8px; margin-bottom:15px;"
+    />
+    <p>Aquí se mostrará la funcionalidad de la ruleta.</p>
+    <button onclick="spinRouleta()">Girar</button>
+    <p id="resultadoRuleta"></p>
+    <button class="back-btn" onclick="showSection('inicioSection')">Volver</button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <button onclick="showSection('inicioSection')">
+      <i class="fas fa-home"></i>
+      <span>Inicio</span>
+    </button>
+    <button onclick="showSection('tareaSection')">
+      <i class="fas fa-tasks"></i>
+      <span>Tarea</span>
+    </button>
+    <button onclick="showSection('vipSection')">
+      <i class="fas fa-star"></i>
+      <span>VIP</span>
+    </button>
+    <button onclick="showSection('invitarSection')">
+      <i class="fas fa-user-friends"></i>
+      <span>Invitar</span>
+    </button>
+    <button onclick="showSection('perfilSection')">
+      <i class="fas fa-user"></i>
+      <span>Mi Perfil</span>
+    </button>
+  </nav>
+
+  <script>
+    // Función para mostrar la sección deseada
+    function showSection(sectionId) {
+      document.querySelectorAll('.section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+    }
+
+    // Simular datos de usuario en localStorage
+    if (!localStorage.getItem('usuario')) {
+      const usuarioInicial = {
+        nombre: 'Usuario Ejemplo',
+        vipNivel: 1, // Cambia a 0,1,2,3 para pruebas
+        invitacion: Math.random().toString(36).substring(2, 8)
+      };
+      localStorage.setItem('usuario', JSON.stringify(usuarioInicial));
+    }
+
+    const usuario = JSON.parse(localStorage.getItem('usuario'));
+
+    // Actualizar perfil e invitación
+    document.getElementById('vipNivel').innerText = usuario.vipNivel;
+    document.getElementById('invitacionCode').innerText = usuario.invitacion;
+    const inviteLink = 'https://vaisusdt.xyz/code/' + usuario.invitacion;
+    document.getElementById('inviteLinkText').innerText = inviteLink;
+    document.getElementById('perfilInvitacion').innerText = usuario.invitacion;
+    document.getElementById('perfilLink').innerText = inviteLink;
+    document.getElementById('perfilLink').href = inviteLink;
+
+    // Tareas
+    let realizadas = 0;
+    let pendientes = 1;
+    let completadas = 0;
+
+    function actualizarTareas() {
+      document.getElementById('realizadasCount').innerText = realizadas;
+      document.getElementById('pendientesCount').innerText = pendientes;
+      document.getElementById('completadasCount').innerText = completadas;
+    }
+    actualizarTareas();
+
+    // Popup Minar
+    const minarBtn = document.getElementById('minarBtn');
+    const tareaMinado = document.getElementById('tareaMinado');
+    const resultadoTarea = document.getElementById('resultadoTarea');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupMessage = document.getElementById('popupMessage');
+    const closePopupBtn = document.getElementById('closePopupBtn');
+
+    if (minarBtn) {
+      minarBtn.addEventListener('click', () => {
+        if (usuario.vipNivel <= 0) {
+          alert('Necesitas tener un nivel VIP para minar.');
+          return;
+        }
+        tareaMinado.classList.add('minando');
+        setTimeout(() => {
+          tareaMinado.classList.remove('minando');
+          let ganancia = 0;
+          switch (usuario.vipNivel) {
+            case 1:
+              ganancia = 5.5;
+              break;
+            case 2:
+              ganancia = 21.02;
+              break;
+            case 3:
+              ganancia = 74.21;
+              break;
+            default:
+              ganancia = 0;
+          }
+          realizadas++;
+          completadas++;
+          pendientes = pendientes > 0 ? pendientes - 1 : 0;
+          actualizarTareas();
+          // Mostrar popup con ganancia
+          popupMessage.innerText = 'Haz minado: ' + ganancia + ' USDT';
+          popupOverlay.style.display = 'flex';
+        }, 1500);
+      });
+    }
+
+    closePopupBtn.addEventListener('click', () => {
+      popupOverlay.style.display = 'none';
+    });
+
+    // Carrusel auto-rotativo
+    const carouselImages = document.getElementById('carouselImages');
+    const imgs = carouselImages.children;
+    let currentIndex = 0;
+    const totalImages = imgs.length;
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % totalImages;
+      carouselImages.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', nextImage);
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+      carouselImages.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+    });
+
+    setInterval(nextImage, 4000);
+
+    // Copiar invitación
+    const copyInviteBtn = document.getElementById('copyInviteBtn');
+    copyInviteBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(inviteLink).then(() => {
+        alert('Enlace de invitación copiado');
+      });
+    });
+
+    // Filtro de tiempo en Team report (solo ejemplo)
+    document.getElementById('searchBtn').addEventListener('click', () => {
+      alert(
+        'Búsqueda por tiempo: ' + document.getElementById('timeSelect').value
+      );
+    });
+
+    // Retiro con validaciones
+    document
+      .getElementById('retiroForm')
+      .addEventListener('submit', function (e) {
+        e.preventDefault();
+        let amount = parseFloat(document.getElementById('amount').value);
+        let wallet = document.getElementById('wallet').value.trim();
+        let password = document.getElementById('password').value;
+
+        if (isNaN(amount) || amount < 5.5) {
+          alert('Error: La cantidad a retirar debe ser mayor o igual a 5.5 USDT.');
+          return;
+        }
+
+        let bep20Regex = /^0x[a-fA-F0-9]{40}$/;
+        if (!bep20Regex.test(wallet)) {
+          alert('Error: La dirección de billetera debe ser un address BEP20 válido.');
+          return;
+        }
+
+        if (password !== '123456') {
+          alert('Error: Contraseña incorrecta.');
+          return;
+        }
+
+        alert('Solicitud de retiro enviada.');
+        this.reset();
+        showSection('inicioSection');
+      });
+
+    // Recarga (copiar dirección)
+    document.getElementById('copyBtn').addEventListener('click', () => {
+      const address = document.getElementById('bepAddress').innerText;
+      navigator.clipboard.writeText(address).then(() => {
+        let btn = document.getElementById('copyBtn');
+        btn.innerText = 'Copiado';
+        setTimeout(() => {
+          btn.innerText = 'Copiar';
+        }, 2000);
+      });
+    });
+
+    // Sistema VIP - Popup de confirmación de compra
+    const vipContainer = document.getElementById('vipContainer');
+    const popupVipOverlay = document.getElementById('popupVipOverlay');
+    const vipPopupMessage = document.getElementById('vipPopupMessage');
+    const confirmVipBtn = document.getElementById('confirmVipBtn');
+    const cancelVipBtn = document.getElementById('cancelVipBtn');
+    let selectedVipPlan = null;
+
+    vipContainer.addEventListener('click', (e) => {
+      const card = e.target.closest('.vip-card');
+      if (card) {
+        selectedVipPlan = card.dataset.plan;
+        vipPopupMessage.innerText = '¿Deseas comprar VIP ' + selectedVipPlan + '?';
+        popupVipOverlay.style.display = 'flex';
+      }
+    });
+
+    confirmVipBtn.addEventListener('click', () => {
+      alert('Has comprado VIP ' + selectedVipPlan);
+      popupVipOverlay.style.display = 'none';
+    });
+
+    cancelVipBtn.addEventListener('click', () => {
+      popupVipOverlay.style.display = 'none';
+    });
+
+    // Ruleta
+    function spinRouleta() {
+      // Solo dos resultados: 0.30 USDT o 'Keep Going'
+      let outcome = Math.random() < 0.5 ? '0.30 USDT' : 'Keep Going';
+      const resSpan = document.getElementById('resultadoRuleta');
+      resSpan.innerText = 'Resultado: ' + outcome;
+      if (outcome === '0.30 USDT') {
+        // Aquí podrías simular un saldo y sumarlo
+        alert('¡Has ganado 0.30 USDT!');
+      }
+    }
+  </script>
+</body>
+</html>
